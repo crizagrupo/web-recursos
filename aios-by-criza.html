@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>AIOS by Criza · Instalación y uso · Criza Grupo</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link href="estilos.css" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="index.html"><img src="logo-navy.png" alt="Criza"></a>
+    <a class="btn btn-ghost sm nav-right" href="biblioteca.html"><i data-lucide="arrow-left"></i> Biblioteca</a>
+  </div>
+</nav>
+
+<!-- CABECERA -->
+<header class="lib-hero">
+  <div class="wrap">
+    <span class="eyebrow"><i data-lucide="box"></i> Producto · AIOS by Criza</span>
+    <h1>AIOS by Criza</h1>
+    <p>Sistema operativo de IA para tu negocio. Una capa que se instala sobre Claude Code y convierte la IA en el centro de operación de tu empresa: conoce tu negocio, gestiona tus proyectos, automatiza tareas y construye tus propias herramientas.</p>
+    <ul class="bullets prod-bullets">
+      <li><i data-lucide="check-circle-2"></i> De cero a funcionando sin saber programar</li>
+      <li><i data-lucide="check-circle-2"></i> Define tu negocio una vez; crea tantos proyectos como necesites</li>
+      <li><i data-lucide="check-circle-2"></i> Nada se construye sin tu aprobación</li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap prod-main">
+
+  <p class="prod-intro">Esta guía te lleva desde cero —sin nada instalado— hasta tener el AIOS funcionando y tu primer proyecto en marcha. Despliega cada apartado para seguir los pasos; al final tienes la descarga.</p>
+
+  <!-- ACORDEÓN DE DESPLEGABLES -->
+  <section class="acc">
+
+    <details open>
+      <summary><span class="acc-t"><span class="acc-n">1</span> Qué es y cómo funciona</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p>El AIOS trabaja en <strong>dos niveles</strong>:</p>
+        <ul>
+          <li><strong>Nivel negocio (global).</strong> El cerebro. Vive en la configuración de tu equipo y está activo siempre, trabajes donde trabajes. Contiene la identidad de tu negocio, sus integraciones, sus herramientas y la vista de todos tus proyectos.</li>
+          <li><strong>Nivel proyecto (local).</strong> Una carpeta por cada cliente o iniciativa. Hereda todo lo del negocio y añade su propio registro (estado, mapa, histórico) y sus tareas.</li>
+        </ul>
+        <p>Idea base: <strong>el negocio se define una vez; los proyectos se crean tantos como necesites.</strong> Cada proyecto ya "sabe" quién eres porque hereda el cerebro.</p>
+        <p>El AIOS distingue dos formas de trabajar:</p>
+        <ul>
+          <li><strong>Operar</strong> — preguntar, consultar, registrar el día a día. Respuesta directa.</li>
+          <li><strong>Construir</strong> — crear automatizaciones o herramientas nuevas. Sigue un flujo controlado en el que <strong>tú apruebas antes de que se construya nada</strong>.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">2</span> Requisitos previos</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p>Antes de instalar el AIOS necesitas tres cosas. Se instalan una sola vez.</p>
+        <h4>Cuenta de Claude</h4>
+        <p>Una suscripción activa de Claude (Pro o superior) en <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. Es la que da acceso a la IA y a las integraciones (Google Drive, Microsoft 365, Figma, etc.).</p>
+        <h4>Claude Code</h4>
+        <p>La aplicación sobre la que corre el AIOS.</p>
+        <ul>
+          <li><strong>Opción recomendada (no técnica):</strong> descarga la <strong>app de escritorio de Claude Code</strong> para Windows o Mac desde <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude.com/claude-code</a> e instálala como cualquier programa.</li>
+          <li><strong>Opción por terminal:</strong> si te manejas con la línea de comandos, <code>npm install -g @anthropic-ai/claude-code</code>.</li>
+        </ul>
+        <p>Al abrirla por primera vez, inicia sesión con tu cuenta de Claude.</p>
+        <h4>Node.js</h4>
+        <p>Necesario para el dashboard y las verificaciones internas. Descarga la versión <strong>LTS</strong> desde <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> e instálala con las opciones por defecto.</p>
+        <p>Para comprobar que quedó bien, abre una terminal y escribe <code>node --version</code>: debe responder con un número de versión.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">3</span> Instalación del AIOS</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <h4>Descargar y descomprimir</h4>
+        <p>Descarga el archivo <code>AIOS-by-Criza.zip</code> (botón al final de esta página) y descomprímelo. Verás dos piezas:</p>
+        <ul>
+          <li><code>aios-global/</code> — el cerebro del negocio.</li>
+          <li><code>plantilla-proyecto/</code> — el molde para crear cada proyecto.</li>
+        </ul>
+        <h4>Colocar el cerebro en su sitio</h4>
+        <p>El contenido de <code>aios-global/</code> va dentro de la <strong>carpeta de configuración de Claude Code</strong>:</p>
+        <ul>
+          <li><strong>Windows:</strong> <code>C:\Users\TU-USUARIO\.claude</code></li>
+          <li><strong>Mac:</strong> <code>/Users/TU-USUARIO/.claude</code></li>
+        </ul>
+        <p class="nota">La carpeta <code>.claude</code> está oculta. En Windows activa "Elementos ocultos" en el Explorador; en Mac pulsa <code>Cmd + Shift + .</code> para verla.</p>
+        <p>Copia <strong>el contenido</strong> de <code>aios-global/</code> dentro de <code>.claude</code>. Si ya tenías archivos ahí (por ejemplo un <code>CLAUDE.md</code> con tus preferencias), <strong>no se borran: se fusionan</strong>. Ante la duda, haz una copia de seguridad de tu <code>.claude</code> antes.</p>
+        <h4>Definir tu negocio</h4>
+        <p>Abre la carpeta <code>.claude/CONTEXT/</code> y rellena los archivos. Cada uno tiene preguntas guía (marcadas como <code>TODO</code>) que solo tienes que responder:</p>
+        <table>
+          <thead><tr><th>Archivo</th><th>Qué poner</th></tr></thead>
+          <tbody>
+            <tr><td><code>negocio.md</code></td><td>Qué hace tu empresa, propuesta de valor, diferencial</td></tr>
+            <tr><td><code>servicios-pricing.md</code></td><td>Qué vendes y a qué precio</td></tr>
+            <tr><td><code>equipo.md</code></td><td>Quién es quién y quién decide</td></tr>
+            <tr><td><code>clientes-objetivo.md</code></td><td>A quién te diriges</td></tr>
+            <tr><td><code>estrategia.md</code></td><td>Objetivos y prioridades</td></tr>
+            <tr><td><code>procesos.md</code></td><td>Cómo entra un cliente y cómo se le entrega</td></tr>
+          </tbody>
+        </table>
+        <p>No hace falta que lo hagas a mano: puedes abrir Claude Code y pedirle <em>"ayúdame a rellenar el CONTEXT de mi negocio"</em>, e irá preguntándote.</p>
+        <h4>Personalizar la identidad</h4>
+        <p>En el archivo <code>.claude/CLAUDE.md</code> sustituye el nombre del negocio y del responsable donde aparezcan los marcadores <code>{{NOMBRE_NEGOCIO}}</code> y <code>{{DUENO}}</code>. También puedes pedírselo a la IA: <em>"personaliza la plantilla con estos datos…"</em>.</p>
+        <h4>Conectar integraciones (opcional)</h4>
+        <p>Si tu negocio usa plataformas (un CRM, base de datos, etc.):</p>
+        <ol>
+          <li>Copia el archivo <code>.env.example</code> y renómbralo a <code>.env</code>.</li>
+          <li>Pega ahí tus credenciales (claves de API). El <code>.env</code> <strong>nunca se comparte ni se sube a ningún sitio</strong>.</li>
+          <li>Documenta cada plataforma en <code>.claude/DATA/integraciones/</code> usando la plantilla incluida.</li>
+        </ol>
+        <p>Las integraciones que ya vienen con tu cuenta de Claude (Google Drive, Microsoft 365, Figma, Canva…) se activan desde la propia app de Claude, no requieren claves aquí.</p>
+        <h4>Comprobar que funciona</h4>
+        <p>Abre cualquier carpeta en Claude Code y pregunta: <em>"¿quién soy y cómo trabajas?"</em>. Si responde describiendo tu negocio, el cerebro está bien instalado.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">4</span> Crear tu primer proyecto</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p>Cada cliente o iniciativa interna es un proyecto. Para crear uno:</p>
+        <ol>
+          <li>Crea (si no existe) una carpeta <code>Proyectos</code> en tu Escritorio. <strong>Todos tus proyectos cuelgan de aquí</strong> — es lo que permite la vista de negocio.</li>
+          <li>Copia la carpeta <code>plantilla-proyecto/</code> dentro de <code>Proyectos/</code> y renómbrala con el nombre del proyecto (ej. <code>Proyectos/Cliente-Acme</code>).</li>
+          <li>Ábrela en Claude Code.</li>
+        </ol>
+        <p>El proyecto ya hereda todo tu negocio. Dentro tiene su propio registro:</p>
+        <ul>
+          <li><code>ESTADO.md</code> — cómo va el proyecto ahora mismo.</li>
+          <li><code>MAPA.md</code> — índice de dónde está cada cosa.</li>
+          <li><code>HISTORICO.md</code> — lo que se ha ido haciendo.</li>
+          <li>Las carpetas de trabajo (<code>CONTEXT</code>, <code>DATA</code>, <code>INTELLIGENCE</code>, <code>AUTOMATION</code>, <code>BUILD</code>).</li>
+        </ul>
+        <p>Rellena el <code>CONTEXT</code> del proyecto solo con lo específico de ese cliente; lo general del negocio ya lo conoce.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">5</span> Cómo usarlo en el día a día</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p>Hablas con la IA en lenguaje normal. Ella reconoce si quieres operar o construir.</p>
+        <h4>Operar (consultar y registrar)</h4>
+        <ul>
+          <li><em>"¿Cómo va el proyecto Acme?"</em></li>
+          <li><em>"Guarda esta reunión: [notas]"</em> → la archiva y extrae los pendientes.</li>
+          <li><em>"Resúmeme el estado de todos mis proyectos."</em></li>
+          <li><em>"Actualízame el estado tras esta llamada."</em></li>
+        </ul>
+        <h4>Construir (crear algo nuevo)</h4>
+        <ul>
+          <li><em>"Automatiza el seguimiento de clientes sin contacto."</em></li>
+          <li><em>"Móntame una herramienta para generar propuestas."</em></li>
+        </ul>
+        <p>Cuando pides construir, la IA <strong>no empieza a la primera</strong>. Primero investiga, escribe un plan y <strong>te lo presenta para que lo apruebes</strong>. Solo cuando dices "aprobado" construye, y al terminar verifica que funciona y lo registra. Nunca fabrica nada a tus espaldas.</p>
+        <h4>Comandos</h4>
+        <p>Escribiendo <code>/</code> accedes a comandos directos. Los principales:</p>
+        <table>
+          <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
+          <tbody>
+            <tr><td><code>/estado</code></td><td>Resumen rápido del proyecto o del negocio</td></tr>
+            <tr><td><code>/informe</code></td><td>Genera un informe con formato profesional a partir de notas o reuniones</td></tr>
+            <tr><td><code>/dashboard</code></td><td>Actualiza el panel de seguimiento</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">6</span> El dashboard de seguimiento</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p>El AIOS lleva dos vistas:</p>
+        <ul>
+          <li><strong>Dashboard de negocio</strong> — recorre todos los proyectos de tu carpeta <code>Proyectos/</code> y muestra el estado de cada uno en un solo panel. Lo actualizas con <code>/dashboard</code> desde el nivel negocio.</li>
+          <li><strong>Dashboard de proyecto</strong> — el detalle de un proyecto concreto, alimentado por su <code>ESTADO.md</code>.</li>
+        </ul>
+        <p>Para abrir un panel, ejecuta su archivo y se mostrará en tu navegador.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">7</span> Preguntas frecuentes</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p class="faq-q">¿Necesito saber programar?</p>
+        <p>No. Todo se hace hablando con la IA en lenguaje normal. Los pasos técnicos (instalar, copiar carpetas) son los del manual.</p>
+        <p class="faq-q">¿Mis datos son privados?</p>
+        <p>Sí. El AIOS vive en tu equipo. Las credenciales van en un archivo <code>.env</code> que no se comparte. Tú controlas qué se conecta.</p>
+        <p class="faq-q">¿Puedo tener muchos proyectos?</p>
+        <p>Los que quieras. Todos heredan el mismo cerebro de negocio y aparecen en el dashboard.</p>
+        <p class="faq-q">¿La IA puede construir cosas sin avisarme?</p>
+        <p>No. Cualquier construcción se para y pide tu aprobación antes de tocar nada.</p>
+        <p class="faq-q">Instalé el cerebro pero no reconoce mi negocio.</p>
+        <p>Revisa que copiaste el contenido de <code>aios-global/</code> <em>dentro</em> de <code>.claude</code> (no la carpeta <code>aios-global</code> entera) y que rellenaste <code>CONTEXT/</code>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="acc-t"><span class="acc-n">8</span> Soporte</span><i class="chev" data-lucide="chevron-down"></i></summary>
+      <div class="acc-body">
+        <p>Este AIOS es un producto de <strong>Criza Grupo</strong>. Para dudas, instalación asistida o personalización avanzada, contacta con el equipo de Criza.</p>
+      </div>
+    </details>
+
+  </section>
+
+  <!-- CTA DE DESCARGA -->
+  <section class="descarga" id="descargar">
+    <h2>Descarga AIOS by Criza</h2>
+    <p>El paquete incluye el cerebro del negocio (<code>aios-global/</code>), la plantilla de proyecto y este manual. Sigue los pasos de arriba para instalarlo.</p>
+    <a class="btn btn-primary" href="archivos/AIOS-by-Criza.zip" download>
+      Descargar AIOS-by-Criza.zip <i data-lucide="download"></i>
+    </a>
+    <p class="descarga-nota">Archivo .zip · convierte la IA en el sistema operativo de tu negocio.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="logo"><img src="logo-navy.png" alt="Criza"></div>
+    <div>Biblioteca de recursos · Criza Grupo</div>
+    <div>© 2026</div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>if (window.lucide) lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "criza-web-recursos",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/biblioteca", "destination": "/biblioteca.html" },
+    { "source": "/aios-by-criza", "destination": "/aios-by-criza.html" }
+  ]
+}

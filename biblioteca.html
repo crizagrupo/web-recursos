@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Biblioteca de recursos · Criza Grupo</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link href="estilos.css" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="index.html"><img src="logo-navy.png" alt="Criza"></a>
+    <a class="btn btn-ghost sm nav-right" href="index.html">Inicio</a>
+  </div>
+</nav>
+
+<!-- CABECERA -->
+<header class="lib-hero">
+  <div class="wrap">
+    <div class="saludo" id="saludo">Tu biblioteca</div>
+    <h1>Biblioteca de recursos</h1>
+    <p>Todo el contenido reunido en un único lugar. Descarga lo que necesites o abre los enlaces. Guarda esta página: tienes el acceso también en tu email.</p>
+  </div>
+</header>
+
+<!-- RECURSOS (se rellenan desde recursos.js vía app.js) -->
+<main class="wrap" id="biblioteca">
+  <div class="empty">Cargando recursos…</div>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="logo"><img src="logo-navy.png" alt="Criza"></div>
+    <div>Biblioteca de recursos · Criza Grupo</div>
+    <div>© 2026</div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="recursos.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

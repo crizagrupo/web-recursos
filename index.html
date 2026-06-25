@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos gratuitos · Criza Grupo</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link href="estilos.css" rel="stylesheet">
+</head>
+<body class="landing-full">
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="index.html"><img src="logo-navy.png" alt="Criza"></a>
+  </div>
+</nav>
+
+<!-- HERO + FORMULARIO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><i data-lucide="sparkles"></i> Acceso gratuito</span>
+      <h1>La Inteligencia Artificial <em>trabajando para tu negocio</em></h1>
+      <p class="lead">Las guías, plantillas y automatizaciones con las que ayudamos a PYMES a ahorrar horas cada semana.</p>
+      <ul class="bullets">
+        <li><i data-lucide="check-circle-2"></i> Sistemas que puedes aplicar esta misma semana</li>
+        <li><i data-lucide="check-circle-2"></i> Sin tecnicismos: pensado para quien dirige, no para programar</li>
+        <li><i data-lucide="check-circle-2"></i> Acceso inmediato y el enlace en tu email para volver</li>
+      </ul>
+    </div>
+
+    <div class="form-card" id="acceder">
+      <h2>Accede a los recursos de<br><em>Criza Grupo</em></h2>
+      <p class="sub">Completa los datos y entra ahora mismo.</p>
+      <form id="form-acceso" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="given-name" placeholder="Tu nombre">
+          <div class="err" data-err-for="nombre"></div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="tu@email.com">
+          <div class="err" data-err-for="email"></div>
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="consent" name="consent">
+          <span>Acepto recibir el enlace de acceso y comunicaciones por email. Puedo darme de baja cuando quiera.</span>
+        </label>
+        <div class="err" data-err-for="consent" style="margin:-12px 0 14px"></div>
+        <button type="submit" class="btn btn-primary" id="btn-enviar">
+          Explorar recursos <i data-lucide="arrow-right"></i>
+        </button>
+        <p class="form-note">Acceso gratis. Baja cuando quieras.</p>
+      </form>
+    </div>
+  </div>
+</header>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="logo"><img src="logo-navy.png" alt="Criza"></div>
+    <div>Biblioteca de recursos · Criza Grupo</div>
+    <div>© 2026</div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="app.js"></script>
+</body>
+</html>
