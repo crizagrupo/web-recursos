@@ -41,5 +41,3 @@ tablas Supabase, panel admin) está documentado en el monorepo
 La biblioteca lleva `noindex` para que no aparezca en Google, pero el acceso es
 "blando": quien tenga el enlace directo puede entrar sin formulario. Es lo normal
 en un recurso gratuito de captación.
-
-<!-- prueba de auto-deploy: 2026-07-31T18:08:57Z -->
