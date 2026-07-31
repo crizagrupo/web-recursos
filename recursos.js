@@ -1,8 +1,12 @@
 // ============================================================================
 // CATÁLOGO DE RECURSOS — Biblioteca de contenido de Criza Grupo
 // ----------------------------------------------------------------------------
-// FUENTE DE VERDAD de la biblioteca. Para AÑADIR un recurso, copia un bloque
-// { ... } y rellénalo. No hace falta tocar el HTML.
+// RESPALDO — YA NO es la fuente de verdad. La biblioteca carga los recursos
+// desde n8n (webhook recursos-listar) y los recursos se gestionan desde el
+// panel. Este fichero se conserva como copia de seguridad y referencia del
+// formato; biblioteca.html ya no lo incluye.
+//
+// (Histórico) Para AÑADIR un recurso, copia un bloque { ... } y rellénalo.
 //
 // Campos de cada recurso:
 //   titulo       Nombre que se ve en la tarjeta.

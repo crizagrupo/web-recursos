@@ -30,7 +30,7 @@
   </div>
 </header>
 
-<!-- RECURSOS (se rellenan desde recursos.js vía app.js) -->
+<!-- RECURSOS (se cargan desde n8n -> webhook recursos-listar, vía app.js) -->
 <main class="wrap" id="biblioteca">
   <div class="empty">Cargando recursos…</div>
 </main>
@@ -44,7 +44,8 @@
 </footer>
 
 <script src="https://unpkg.com/lucide@latest"></script>
-<script src="recursos.js"></script>
+<!-- recursos.js ya NO es la fuente de verdad: la biblioteca carga desde n8n
+     (webhook recursos-listar). El fichero se conserva como respaldo. -->
 <script src="app.js"></script>
 </body>
 </html>

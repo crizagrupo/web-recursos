@@ -2,14 +2,21 @@
 // app.js — Lógica de la web de recursos de Criza Grupo
 //   (1) Landing (index.html): valida el formulario, envía el lead al webhook
 //       y redirige al instante a la biblioteca.
-//   (2) Biblioteca (biblioteca.html): renderiza los recursos de recursos.js
-//       agrupados por categoría y saluda por el nombre guardado.
+//   (2) Biblioteca (biblioteca.html): carga los recursos desde n8n
+//       (webhook recursos-listar), los renderiza agrupados por categoría y
+//       registra cada descarga a través del webhook recurso-descargar.
 // ============================================================================
 
 // --- Configuración -----------------------------------------------------------
 // Pega aquí la URL del webhook de n8n cuando exista. Si está vacía, el
 // formulario sigue funcionando (da acceso) pero no guarda el lead todavía.
 var WEBHOOK_URL = "https://devn8n.crizagrupo.com/webhook/recursos-lead";
+
+// Webhooks de la biblioteca dinámica (módulo recursos-n8n).
+//   LISTAR_URL    → devuelve el catálogo publicado en JSON.
+//   DESCARGAR_URL → registra el clic y redirige (302) al recurso.
+var LISTAR_URL    = "https://devn8n.crizagrupo.com/webhook/recursos-listar";
+var DESCARGAR_URL = "https://devn8n.crizagrupo.com/webhook/recurso-descargar";
 
 // Clave de localStorage donde guardamos el nombre para personalizar la biblioteca.
 var STORE_KEY = "criza_recursos_lead";
@@ -160,6 +167,25 @@ function accionRecurso(r){
   return                           { icono: "download",      texto: "Descargar",  attrs: "download" };
 }
 
+// Email guardado en localStorage al pasar por la landing. Vacío si no existe (R5).
+function emailGuardado(){
+  try {
+    var lead = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    return (lead && lead.email) ? lead.email : "";
+  } catch (_){ return ""; }
+}
+
+// Construye el enlace del botón: siempre pasa por recurso-descargar para que el
+// clic quede registrado. n8n redirige (302) al fichero, enlace o página según el
+// tipo del recurso. Sirve para descarga, enlace y pagina (R3, R4, R5).
+function urlDescarga(r){
+  var params = new URLSearchParams();
+  params.set("id", r.id == null ? "" : r.id);
+  params.set("email", emailGuardado());
+  params.set("fuente", "biblioteca");
+  return DESCARGAR_URL + "?" + params.toString();
+}
+
 function tarjetaRecurso(r){
   var a = accionRecurso(r);
   return '' +
@@ -169,7 +195,7 @@ function tarjetaRecurso(r){
         '<h3>' + escapar(r.titulo) + '</h3>' +
         '<p>' + escapar(r.descripcion) + '</p>' +
         '<div class="foot">' +
-          '<a class="btn btn-primary sm" href="' + escapar(r.url) + '" ' + a.attrs + '>' +
+          '<a class="btn btn-primary sm" href="' + escapar(urlDescarga(r)) + '" ' + a.attrs + '>' +
             escapar(a.texto) + ' <i data-lucide="' + a.icono + '"></i>' +
           '</a>' +
         '</div>' +
@@ -187,32 +213,16 @@ function tarjetaDestacada(r){
         '<span class="feat-badge"><i data-lucide="box"></i> Producto destacado</span>' +
         '<h3>' + escapar(r.titulo) + '</h3>' +
         '<p>' + escapar(r.descripcion) + '</p>' +
-        '<a class="btn btn-primary" href="' + escapar(r.url) + '" ' + a.attrs + '>' +
+        '<a class="btn btn-primary" href="' + escapar(urlDescarga(r)) + '" ' + a.attrs + '>' +
           escapar(a.texto) + ' <i data-lucide="' + a.icono + '"></i>' +
         '</a>' +
       '</div>' +
     '</article>';
 }
 
-function initBiblioteca(){
-  var cont = document.getElementById("biblioteca");
-  if (!cont) return;
-
-  // Saludo personalizado si tenemos el nombre guardado.
-  try {
-    var lead = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
-    if (lead && lead.nombre){
-      var saludo = document.getElementById("saludo");
-      if (saludo) saludo.textContent = "Hola, " + lead.nombre;
-    }
-  } catch (_){}
-
-  var recursos = window.RECURSOS || [];
-  if (!recursos.length){
-    cont.innerHTML = '<div class="empty">Aún no hay recursos publicados.</div>';
-    return;
-  }
-
+// Pinta el catálogo ya cargado: destacados arriba, el resto agrupado por
+// categoría. Mismo HTML de siempre (tarjetas, mockups). (R1)
+function renderRecursos(cont, recursos){
   // Separa los recursos destacados: van arriba del todo, como tarjeta grande.
   var destacados = recursos.filter(function(r){ return r.destacado; });
   var resto = recursos.filter(function(r){ return !r.destacado; });
@@ -241,6 +251,54 @@ function initBiblioteca(){
 
   cont.innerHTML = html;
   pintarIconos();
+}
+
+// Carga los recursos desde n8n (recursos-listar) y los renderiza. Muestra un
+// estado de carga y, si el fetch falla, un mensaje amable (R1, R2).
+async function initBiblioteca(){
+  var cont = document.getElementById("biblioteca");
+  if (!cont) return;
+
+  // Saludo personalizado si tenemos el nombre guardado.
+  try {
+    var lead = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+    if (lead && lead.nombre){
+      var saludo = document.getElementById("saludo");
+      if (saludo) saludo.textContent = "Hola, " + lead.nombre;
+    }
+  } catch (_){}
+
+  // Estado de carga.
+  cont.innerHTML = '<div class="empty">Cargando recursos…</div>';
+
+  // Pide el catálogo publicado al webhook. Si algo falla, mensaje amable (R2).
+  var recursos;
+  try {
+    var resp = await fetch(LISTAR_URL, { headers: { "Accept": "application/json" } });
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    var data = await resp.json();
+    // Acepta tanto { ok, recursos:[...] } como un array suelto.
+    recursos = (data && data.recursos) || (Array.isArray(data) ? data : []);
+  } catch (err){
+    console.warn("No se pudieron cargar los recursos:", err);
+    cont.innerHTML = '<div class="empty">No se pudieron cargar los recursos ahora mismo. ' +
+      'Recarga la página en unos minutos; si el problema continúa, escríbenos.</div>';
+    return;
+  }
+
+  // El webhook manda 'destino'; el render existente lee 'url'. Mapeamos para
+  // reutilizar detectarFormato / mockupHTML sin tocarlos.
+  recursos = recursos.map(function(r){
+    if (r.url == null && r.destino != null) r.url = r.destino;
+    return r;
+  });
+
+  if (!recursos.length){
+    cont.innerHTML = '<div class="empty">Aún no hay recursos publicados.</div>';
+    return;
+  }
+
+  renderRecursos(cont, recursos);
 }
 
 // --- Arranque ----------------------------------------------------------------
