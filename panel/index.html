@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel de recursos · Criza Grupo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link href="estilos.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── PANTALLA: LOGIN ───────────────────────────────────────────────────── -->
+<div id="s-login" class="screen">
+  <div class="login-wrap">
+    <div class="login-brand">
+      <div class="lb-logo">Criza</div>
+      <div class="lb-product">Panel de Recursos</div>
+    </div>
+    <div class="login-card">
+      <h1>Acceso del equipo</h1>
+      <p class="login-sub">Solo el equipo de Criza tiene acceso a este panel.</p>
+      <div id="login-alert" class="alert alert-err" hidden></div>
+      <div class="field">
+        <label for="l-email">Email</label>
+        <input type="email" id="l-email" placeholder="tu@crizagrupo.com" autocomplete="email">
+        <div class="err" id="l-email-err"></div>
+      </div>
+      <div class="field">
+        <label for="l-pwd">Contraseña</label>
+        <input type="password" id="l-pwd" placeholder="••••••••" autocomplete="current-password">
+        <div class="err" id="l-pwd-err"></div>
+      </div>
+      <button class="btn btn-primary" id="btn-login">Entrar</button>
+      <p class="login-forgot"><a href="#" id="link-forgot">¿Olvidaste tu contraseña?</a></p>
+      <p class="login-note">Acceso gestionado por el administrador de Criza.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── PANTALLA: RECUPERAR CONTRASEÑA (pedir email) ──────────────────────── -->
+<div id="s-recuperar" class="screen" hidden>
+  <div class="login-wrap">
+    <div class="login-brand">
+      <div class="lb-logo">Criza</div>
+      <div class="lb-product">Panel de Recursos</div>
+    </div>
+    <div class="login-card">
+      <h1>Recuperar contraseña</h1>
+      <p class="login-sub">Escribe tu email y te enviaremos un enlace para crear una contraseña nueva.</p>
+      <div id="rec-alert" class="alert alert-ok" hidden></div>
+      <div class="field">
+        <label for="rec-email">Email</label>
+        <input type="email" id="rec-email" placeholder="tu@crizagrupo.com" autocomplete="email">
+        <div class="err" id="rec-email-err"></div>
+      </div>
+      <button class="btn btn-primary" id="btn-rec-enviar">Enviar enlace</button>
+      <p class="login-forgot"><a href="#" id="link-rec-volver">Volver al acceso</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── PANTALLA: NUEVA CONTRASEÑA (desde el enlace del email) ─────────────── -->
+<div id="s-nueva-pwd" class="screen" hidden>
+  <div class="login-wrap">
+    <div class="login-brand">
+      <div class="lb-logo">Criza</div>
+      <div class="lb-product">Panel de Recursos</div>
+    </div>
+    <div class="login-card">
+      <h1>Nueva contraseña</h1>
+      <p class="login-sub">Escribe tu nueva contraseña para acceder al panel.</p>
+      <div id="np-alert" class="alert alert-err" hidden></div>
+      <div class="field">
+        <label for="np-pwd">Nueva contraseña</label>
+        <input type="password" id="np-pwd" placeholder="••••••••" autocomplete="new-password">
+        <div class="err" id="np-pwd-err"></div>
+      </div>
+      <div class="field">
+        <label for="np-pwd2">Repite la contraseña</label>
+        <input type="password" id="np-pwd2" placeholder="••••••••" autocomplete="new-password">
+        <div class="err" id="np-pwd2-err"></div>
+      </div>
+      <button class="btn btn-primary" id="btn-np-guardar">Guardar y entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PANTALLA: PANEL ───────────────────────────────────────────────────── -->
+<div id="s-panel" class="screen" hidden>
+
+  <!-- Barra superior -->
+  <header class="p-topbar">
+    <div class="p-topbar-in">
+      <div class="p-brand">
+        <span class="p-logo">Criza</span>
+        <span class="p-sep">/</span>
+        <span class="p-title">Recursos</span>
+      </div>
+      <div class="p-userbar">
+        <span class="p-avatar" id="p-avatar">L</span>
+        <span class="p-email" id="p-email">usuario@crizagrupo.com</span>
+        <button class="btn btn-ghost sm" id="btn-logout">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Pestañas -->
+  <div class="p-tabbar">
+    <div class="p-tabbar-in">
+      <button class="p-tab p-tab-active" data-tab="subir">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+        Subir recurso
+      </button>
+      <button class="p-tab" data-tab="analitica">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analítica
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <main class="p-main">
+    <div class="wrap">
+
+      <!-- ── TAB: SUBIR ──────────────────────────────────────────────── -->
+      <div id="tab-subir" class="tab-pane">
+        <div class="subir-grid">
+
+          <!-- Formulario -->
+          <section class="form-section">
+            <div class="section-head">
+              <h2 id="form-h2">Nuevo recurso</h2>
+              <p id="form-p">Rellena el formulario y el recurso aparecerá en la biblioteca.</p>
+            </div>
+
+            <div id="form-ok" class="alert alert-ok" hidden>
+              El recurso se ha publicado correctamente.
+              <button id="btn-otro" class="btn btn-ghost sm">Subir otro</button>
+            </div>
+
+            <form id="form-subir" novalidate>
+              <div id="form-err" class="alert alert-err" hidden></div>
+
+              <div class="field">
+                <label for="f-titulo">Título <span class="req">*</span></label>
+                <input type="text" id="f-titulo" placeholder="Ej. Guía de productividad con IA">
+                <div class="err" id="err-titulo"></div>
+              </div>
+
+              <div class="field">
+                <label for="f-desc">Descripción</label>
+                <textarea id="f-desc" rows="2" placeholder="Una frase que explique qué es el recurso."></textarea>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-cat">Categoría</label>
+                  <input type="text" id="f-cat" list="cats" placeholder="Guías descargables">
+                  <datalist id="cats">
+                    <option value="Guías descargables">
+                    <option value="Plantillas">
+                    <option value="Formación en vídeo">
+                    <option value="Producto">
+                    <option value="Herramientas">
+                  </datalist>
+                </div>
+                <div class="field">
+                  <label for="f-tipo">Tipo <span class="req">*</span></label>
+                  <select id="f-tipo">
+                    <option value="descarga">Descarga (PDF, ZIP…)</option>
+                    <option value="enlace">Enlace externo</option>
+                    <option value="pagina">Página interna</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Campo condicional: fichero -->
+              <div id="cf-descarga" class="field cf">
+                <label>Fichero <span class="req">*</span> <span class="field-hint" id="file-max-hint"></span></label>
+                <div class="file-drop" id="file-drop">
+                  <input type="file" id="f-file" accept=".pdf,.xlsx,.xls,.csv,.zip,.docx,.pptx">
+                  <div class="file-ui">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                    <span id="file-txt">Arrastra o <u>selecciona el fichero</u></span>
+                  </div>
+                </div>
+                <div class="err" id="err-file"></div>
+              </div>
+
+              <!-- Campo condicional: URL -->
+              <div id="cf-enlace" class="field cf" hidden>
+                <label for="f-url">URL del enlace <span class="req">*</span></label>
+                <input type="url" id="f-url" placeholder="https://...">
+                <div class="err" id="err-url"></div>
+              </div>
+
+              <!-- Campo condicional: página -->
+              <div id="cf-pagina" class="field cf" hidden>
+                <label for="f-pagina">Nombre de la página interna <span class="req">*</span></label>
+                <input type="text" id="f-pagina" placeholder="Ej. aios-by-criza.html">
+              </div>
+
+              <div class="checks-row">
+                <label class="check-lbl">
+                  <input type="checkbox" id="f-destacado">
+                  <span>Destacado <small>(aparece grande arriba)</small></span>
+                </label>
+                <label class="check-lbl">
+                  <input type="checkbox" id="f-publicado" checked>
+                  <span>Publicado <small>(visible en la biblioteca)</small></span>
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="btn-subir">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                  Publicar recurso
+                </button>
+                <button type="button" class="btn btn-ghost" id="btn-cancelar" hidden>Cancelar</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Lista de recursos existentes -->
+          <section class="lista-section">
+            <div class="section-head">
+              <h2>En la biblioteca</h2>
+              <p><span id="lista-count">5</span> recursos registrados</p>
+            </div>
+            <div id="lista-recursos" class="lista-items"></div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ── TAB: ANALÍTICA ──────────────────────────────────────────── -->
+      <div id="tab-analitica" class="tab-pane" hidden>
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Descargas totales</div>
+            <div class="kpi-num" id="kpi-descargas">—</div>
+            <div class="kpi-sub">registradas en la base de datos</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Contactos captados</div>
+            <div class="kpi-num" id="kpi-contactos">—</div>
+            <div class="kpi-sub">registros en base de datos</div>
+          </div>
+          <div class="kpi-card kpi-highlight">
+            <div class="kpi-label">Recurso top</div>
+            <div class="kpi-top-name" id="kpi-top-name">—</div>
+            <div class="kpi-sub" id="kpi-top-sub">—</div>
+          </div>
+        </div>
+
+        <!-- Gráfico -->
+        <div class="chart-block">
+          <h3>Descargas últimos 7 días</h3>
+          <div class="chart-wrap">
+            <div class="chart" id="chart-dias"></div>
+          </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="tabla-block">
+          <h3>Por recurso</h3>
+          <div class="tabla-scroll">
+            <table class="tabla">
+              <thead>
+                <tr>
+                  <th>Recurso</th>
+                  <th>Categoría</th>
+                  <th>Tipo</th>
+                  <th>Descargas</th>
+                  <th>Contactos únicos</th>
+                  <th>Estado</th>
+                  <th>Subido por</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ── MODAL: CONFIRMACIÓN DE BORRADO (reforzada) ─────────────────────────── -->
+<div id="del-modal" class="modal-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="del-title">
+    <h2 id="del-title" class="modal-title">Eliminar recurso</h2>
+    <p class="modal-text">
+      Vas a eliminar «<strong id="del-nombre"></strong>». Esta acción
+      <strong>no se puede deshacer</strong>: se borra el recurso y su fichero.
+    </p>
+    <div class="field">
+      <label for="del-input">Para confirmar, escribe el título exacto del recurso:</label>
+      <input type="text" id="del-input" autocomplete="off" placeholder="Título del recurso">
+      <div class="err" id="del-err"></div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" id="del-cancel">Cancelar</button>
+      <button type="button" class="btn btn-danger" id="del-confirm" disabled>Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cliente Supabase (autenticación por sesión de equipo) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
