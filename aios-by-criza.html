@@ -11,6 +11,73 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <link href="estilos.css" rel="stylesheet">
+<style>
+  /* ---- estilos de la guía de instalación (tutorial con sidebar) ---- */
+  .tut-hero{position:relative;overflow:hidden;padding:76px 0 64px;
+    background:radial-gradient(900px 420px at 88% -18%,rgba(20,48,110,.06),transparent 62%)}
+  .tut-hero::before{content:"";position:absolute;right:-160px;top:-160px;width:480px;height:480px;border:1px solid var(--line);border-radius:50%;opacity:.6;z-index:0}
+  .tut-hero::after{content:"";position:absolute;right:-30px;top:-30px;width:260px;height:260px;border:1px solid var(--line);border-radius:50%;opacity:.4;z-index:0}
+  .tut-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  @media(max-width:900px){.tut-hero-grid{grid-template-columns:1fr;gap:34px}}
+  .tut-hero h1{font-size:clamp(32px,4.6vw,50px);margin-bottom:14px;max-width:520px;letter-spacing:-.02em}
+  .tut-hero .lead{font-size:17px;color:var(--muted);max-width:460px;margin-bottom:26px}
+  .tut-cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+  .tut-pills{display:flex;gap:10px;flex-wrap:wrap}
+  .tut-pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--navy);background:var(--tint);padding:7px 13px;border-radius:999px}
+  .tut-pill svg{width:13px;height:13px}
+
+  .tut-hero-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 26px 20px}
+  .thc-kicker{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .thc-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--line)}
+  .thc-row:first-of-type{border-top:none}
+  .thc-ic{flex:none;width:38px;height:38px;border-radius:10px;background:var(--tint);color:var(--navy);display:flex;align-items:center;justify-content:center}
+  .thc-ic svg{width:19px;height:19px}
+  .thc-t strong{display:block;font-size:14.5px;color:var(--ink);font-weight:600;margin-bottom:2px}
+  .thc-t span{font-size:12.5px;color:var(--muted)}
+  .thc-foot{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+  .thc-foot img{height:18px;width:auto}
+  .thc-foot span{font-size:12px;color:var(--muted);font-style:italic}
+
+  .tut-kicker{margin:0 0 22px}
+
+  .tut-layout{display:grid;grid-template-columns:252px 1fr;gap:48px;padding:8px 0 100px;align-items:start}
+  .tut-sidebar{position:sticky;top:92px;display:flex;flex-direction:column;gap:20px}
+  .tut-progress{display:flex;flex-direction:column;gap:8px}
+  .tut-progress-bar{height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+  .tut-progress-bar span{display:block;height:100%;width:16.6%;background:var(--navy);border-radius:99px;transition:width .25s}
+  .tut-progress-label{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .tut-steps{display:flex;flex-direction:column;gap:3px}
+  .tut-step{display:flex;align-items:center;gap:11px;text-align:left;background:transparent;border:none;padding:10px 12px;border-radius:10px;font-family:var(--font);font-size:13.5px;color:var(--muted);cursor:pointer;transition:.15s;width:100%}
+  .tut-step:hover{background:var(--tint);color:var(--ink)}
+  .tut-step.active{background:var(--navy);color:#fff;font-weight:600}
+  .tut-step-n{flex:none;width:24px;height:24px;border-radius:7px;background:var(--line);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:.15s}
+  .tut-step.done .tut-step-n{background:var(--tint);color:var(--navy)}
+  .tut-step.active .tut-step-n{background:rgba(255,255,255,.18);color:#fff}
+  .tut-sidebar-cta{width:100%;margin-top:6px}
+
+  .tut-content{min-width:0}
+  .tut-panel{display:none}
+  .tut-panel.active{display:block;animation:tutfade .25s ease}
+  @keyframes tutfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .tut-panel h2{display:flex;align-items:center;gap:14px;font-size:25px;margin-bottom:14px}
+  .tut-n{flex:none;width:34px;height:34px;border-radius:9px;background:var(--tint);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--font);font-weight:700;font-size:15px}
+  .tut-lead{font-size:15.5px;font-weight:600;color:var(--ink)}
+  .tut-nav-btns{display:flex;justify-content:space-between;align-items:center;margin-top:38px;padding-top:22px;border-top:1px solid var(--line)}
+  .tut-nav-btns .spacer{width:1px}
+
+  /* el estilo de enlaces del manual (.acc-body a) pisaba el color del botón de descarga */
+  .acc-body .descarga .btn-primary{color:#fff;text-decoration:none}
+
+  @media(max-width:860px){
+    .tut-layout{grid-template-columns:1fr;gap:22px}
+    .tut-sidebar{position:static}
+    .tut-steps{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px}
+    .tut-step{flex:none;white-space:nowrap}
+  }
+
+  .tut-video{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:22px;background:#000}
+  .tut-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+</style>
 </head>
 <body>
 
@@ -21,209 +88,181 @@
   </div>
 </nav>
 
-<!-- CABECERA -->
-<header class="lib-hero">
-  <div class="wrap">
-    <span class="eyebrow"><i data-lucide="box"></i> Producto · AIOS by Criza</span>
-    <h1>AIOS by Criza</h1>
-    <p>Sistema operativo de IA para tu negocio. Una capa que se instala sobre Claude Code y convierte la IA en el centro de operación de tu empresa: conoce tu negocio, gestiona tus proyectos, automatiza tareas y construye tus propias herramientas.</p>
-    <ul class="bullets prod-bullets">
-      <li><i data-lucide="check-circle-2"></i> De cero a funcionando sin saber programar</li>
-      <li><i data-lucide="check-circle-2"></i> Define tu negocio una vez; crea tantos proyectos como necesites</li>
-      <li><i data-lucide="check-circle-2"></i> Nada se construye sin tu aprobación</li>
-    </ul>
+<!-- HERO PERSUASIVO -->
+<header class="tut-hero">
+  <div class="wrap tut-hero-grid">
+    <div>
+      <span class="eyebrow"><i data-lucide="box"></i> Producto · AIOS by Criza</span>
+      <h1>Un sistema que ya sabe quién eres.</h1>
+      <p class="lead">Se instala una vez sobre Claude Code y se convierte en el centro de operación de tu negocio.</p>
+      <div class="tut-cta-row">
+        <a class="btn btn-primary" href="#tutorial">Empezar instalación <i data-lucide="arrow-right"></i></a>
+        <a class="btn btn-ghost" href="archivos/AIOS-by-Criza.zip" download>Descargar directamente</a>
+      </div>
+      <div class="tut-pills">
+        <span class="tut-pill"><i data-lucide="check"></i> Sin programar</span>
+        <span class="tut-pill"><i data-lucide="lock"></i> Datos en tu equipo</span>
+      </div>
+    </div>
+
+    <div class="tut-hero-card">
+      <div class="thc-kicker">Lo que cambia</div>
+      <div class="thc-row">
+        <div class="thc-ic"><i data-lucide="repeat"></i></div>
+        <div class="thc-t"><strong>Definido una vez</strong><span>no lo repites en cada chat nuevo</span></div>
+      </div>
+      <div class="thc-row">
+        <div class="thc-ic"><i data-lucide="layout-dashboard"></i></div>
+        <div class="thc-t"><strong>Todo en un panel</strong><span>no en Drive, notas y carpetas sueltas</span></div>
+      </div>
+      <div class="thc-row">
+        <div class="thc-ic"><i data-lucide="shield-check"></i></div>
+        <div class="thc-t"><strong>La IA construye, tú decides</strong><span>nada se mueve sin tu aprobación</span></div>
+      </div>
+      <div class="thc-foot">
+        <img src="logo-navy.png" alt="Criza">
+        <span>Así gestiona Criza Grupo sus propios proyectos</span>
+      </div>
+    </div>
   </div>
 </header>
 
-<main class="wrap prod-main">
+<main class="wrap" id="tutorial">
+  <p class="kicker tut-kicker">Guía paso a paso</p>
 
-  <p class="prod-intro">Esta guía te lleva desde cero —sin nada instalado— hasta tener el AIOS funcionando y tu primer proyecto en marcha. Despliega cada apartado para seguir los pasos; al final tienes la descarga.</p>
+  <div class="tut-layout">
 
-  <!-- ACORDEÓN DE DESPLEGABLES -->
-  <section class="acc">
+    <!-- SIDEBAR -->
+    <aside class="tut-sidebar">
+      <div class="tut-progress">
+        <div class="tut-progress-bar"><span></span></div>
+        <span class="tut-progress-label">Paso 1 de 8</span>
+      </div>
+      <nav class="tut-steps">
+        <button class="tut-step" data-step="1"><span class="tut-step-n">1</span> Qué es y cómo funciona</button>
+        <button class="tut-step" data-step="2"><span class="tut-step-n">2</span> Requisitos e instalación</button>
+        <button class="tut-step" data-step="3"><span class="tut-step-n">3</span> Tu primer proyecto</button>
+        <button class="tut-step" data-step="4"><span class="tut-step-n">4</span> Uso en el día a día</button>
+        <button class="tut-step" data-step="5"><span class="tut-step-n">5</span> Preguntas frecuentes</button>
+        <button class="tut-step" data-step="6"><span class="tut-step-n">6</span> Soporte</button>
+      </nav>
+      <a class="btn btn-primary tut-sidebar-cta" href="archivos/AIOS-by-Criza.zip" download>
+        Descargar .zip <i data-lucide="download"></i>
+      </a>
+    </aside>
 
-    <details open>
-      <summary><span class="acc-t"><span class="acc-n">1</span> Qué es y cómo funciona</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
-        <div class="prod-video">
-          <iframe src="https://www.youtube.com/embed/0Li4M8TPVYo" title="Cómo instalar AIOS by Criza" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    <!-- CONTENIDO -->
+    <section class="tut-content acc">
+
+      <article class="acc-body tut-panel" data-panel="1">
+        <h2><span class="tut-n">1</span> Qué es y cómo funciona</h2>
+        <div class="tut-video">
+          <iframe src="https://www.youtube.com/embed/0Li4M8TPVYo" title="Tutorial AIOS by Criza" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <p>El AIOS trabaja en <strong>dos niveles</strong>:</p>
+        <p class="tut-lead">El AIOS aprende tu negocio una vez y lo recuerda siempre — en cada proyecto, en cada conversación.</p>
+        <p>Funciona en dos niveles:</p>
         <ul>
-          <li><strong>Nivel negocio (global).</strong> El cerebro. Vive en la configuración de tu equipo y está activo siempre, trabajes donde trabajes. Contiene la identidad de tu negocio, sus integraciones, sus herramientas y la vista de todos tus proyectos.</li>
-          <li><strong>Nivel proyecto (local).</strong> Una carpeta por cada cliente o iniciativa. Hereda todo lo del negocio y añade su propio registro (estado, mapa, histórico) y sus tareas.</li>
+          <li><strong>Mi Empresa.</strong> El cerebro: quién eres, cómo trabajas, qué vendes. Se define una vez y está disponible siempre, abras la carpeta que abras.</li>
+          <li><strong>Proyectos.</strong> Un cliente o iniciativa concreta. Hereda las operaciones del negocio y añade solo lo nuevo sobre este proyecto.</li>
         </ul>
-        <p>Idea base: <strong>el negocio se define una vez; los proyectos se crean tantos como necesites.</strong> Cada proyecto ya "sabe" quién eres porque hereda el cerebro.</p>
-        <p>El AIOS distingue dos formas de trabajar:</p>
+        <p>Distingue dos formas de trabajar contigo:</p>
         <ul>
-          <li><strong>Operar</strong> — preguntar, consultar, registrar el día a día. Respuesta directa.</li>
-          <li><strong>Construir</strong> — crear automatizaciones o herramientas nuevas. Sigue un flujo controlado en el que <strong>tú apruebas antes de que se construya nada</strong>.</li>
+          <li><strong>Operar</strong> — preguntas, consultas, registro del día a día. Puedes pedirle una foto actual de tu negocio.</li>
+          <li><strong>Construir</strong> — crear una automatización o herramienta nueva. Aquí siempre te presenta el plan antes de tocar nada, y solo avanza cuando tu lo decides.</li>
         </ul>
-      </div>
-    </details>
+        <div class="tut-nav-btns"><span class="spacer"></span><button class="btn btn-primary tut-next">Siguiente <i data-lucide="arrow-right"></i></button></div>
+      </article>
 
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">2</span> Requisitos previos</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
-        <p>Antes de instalar el AIOS necesitas tres cosas. Se instalan una sola vez.</p>
-        <h4>Cuenta de Claude</h4>
-        <p>Una suscripción activa de Claude (Pro o superior) en <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>. Es la que da acceso a la IA y a las integraciones (Google Drive, Microsoft 365, Figma, etc.).</p>
-        <h4>Claude Code</h4>
-        <p>La aplicación sobre la que corre el AIOS.</p>
+      <article class="acc-body tut-panel" data-panel="2">
+        <h2><span class="tut-n">2</span> Requisitos e instalación</h2>
+        <p class="tut-lead">No copias carpetas ni editas archivos a mano: el propio sistema se instala solo.</p>
+        <h4>Lo que necesitas</h4>
         <ul>
-          <li><strong>Opción recomendada (no técnica):</strong> descarga la <strong>app de escritorio de Claude Code</strong> para Windows o Mac desde <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude.com/claude-code</a> e instálala como cualquier programa.</li>
-          <li><strong>Opción por terminal:</strong> si te manejas con la línea de comandos, <code>npm install -g @anthropic-ai/claude-code</code>.</li>
+          <li><strong>Cuenta de Claude</strong> (Pro o superior) en <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>.</li>
+          <li><strong>VS Code</strong> con la extensión de Claude Code instalada — es el editor donde vas a trabajar.</li>
         </ul>
-        <p>Al abrirla por primera vez, inicia sesión con tu cuenta de Claude.</p>
-        <h4>Node.js</h4>
-        <p>Necesario para el dashboard y las verificaciones internas. Descarga la versión <strong>LTS</strong> desde <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a> e instálala con las opciones por defecto.</p>
-        <p>Para comprobar que quedó bien, abre una terminal y escribe <code>node --version</code>: debe responder con un número de versión.</p>
-      </div>
-    </details>
+        <h4>Instalar</h4>
+        <ol>
+          <li>Descarga y descomprime <code>AIOS-by-Criza.zip</code> (botón al final de esta página).</li>
+          <li>Abre la carpeta <code>Mi-Empresa/</code> en VS Code.</li>
+          <li>Escribe <code>/onboarding</code>. La primera vez se instala a sí mismo en tu ordenador (una sola vez) y sigue, en la misma conversación, con la entrevista de tu negocio.</li>
+        </ol>
+        <h4>Lo que hace /onboarding</h4>
+        <p>Te va guiando por fases, a tu ritmo — puedes cortar y retomar justo donde lo dejaste:</p>
+        <ul>
+          <li><strong>Contexto.</strong> Te entrevista sobre tu negocio (o lee un dossier o web que ya tengas) y escribe él mismo los archivos que lo describen. Nada de tablas ni marcadores que rellenar a mano.</li>
+          <li><strong>Git y GitHub.</strong> Conecta tu trabajo a una copia de seguridad en la nube. Si nunca has usado Git, te lo explica desde cero y hace el trabajo técnico por ti. Se resuelve una vez por ordenador.</li>
+          <li><strong>Tus herramientas.</strong> Conecta lo que ya usas (CRM, Drive, Microsoft 365…) para que la IA pueda leerlo y usarlo. Herramienta por herramienta, a tu ritmo; lo que aplaces queda anotado como pendiente.</li>
+        </ul>
+        <p>Al terminar la primera fase, te resume tu negocio y te pide confirmar que lo entendió bien.</p>
+        <div class="tut-nav-btns"><button class="btn btn-ghost tut-prev">Atrás</button><button class="btn btn-primary tut-next">Siguiente <i data-lucide="arrow-right"></i></button></div>
+      </article>
 
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">3</span> Instalación del AIOS</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
-        <h4>Descargar y descomprimir</h4>
-        <p>Descarga el archivo <code>AIOS-by-Criza.zip</code> (botón al final de esta página) y descomprímelo. Verás dos piezas:</p>
-        <ul>
-          <li><code>aios-global/</code> — el cerebro del negocio.</li>
-          <li><code>plantilla-proyecto/</code> — el molde para crear cada proyecto.</li>
-        </ul>
-        <h4>Colocar el cerebro en su sitio</h4>
-        <p>El contenido de <code>aios-global/</code> va dentro de la <strong>carpeta de configuración de Claude Code</strong>:</p>
-        <ul>
-          <li><strong>Windows:</strong> <code>C:\Users\TU-USUARIO\.claude</code></li>
-          <li><strong>Mac:</strong> <code>/Users/TU-USUARIO/.claude</code></li>
-        </ul>
-        <p class="nota">La carpeta <code>.claude</code> está oculta. En Windows activa "Elementos ocultos" en el Explorador; en Mac pulsa <code>Cmd + Shift + .</code> para verla.</p>
-        <p>Copia <strong>el contenido</strong> de <code>aios-global/</code> dentro de <code>.claude</code>. Si ya tenías archivos ahí (por ejemplo un <code>CLAUDE.md</code> con tus preferencias), <strong>no se borran: se fusionan</strong>. Ante la duda, haz una copia de seguridad de tu <code>.claude</code> antes.</p>
-        <h4>Definir tu negocio</h4>
-        <p>Abre la carpeta <code>.claude/CONTEXT/</code> y rellena los archivos. Cada uno tiene preguntas guía (marcadas como <code>TODO</code>) que solo tienes que responder:</p>
+      <article class="acc-body tut-panel" data-panel="3">
+        <h2><span class="tut-n">3</span> Tu primer proyecto</h2>
+        <p class="tut-lead">Cada cliente o iniciativa vive en su propia carpeta, sin mezclarse con las demás.</p>
+        <ol>
+          <li>Escribe <code>/crear-proyecto</code>. Te pide el nombre del cliente y monta la carpeta él solo, con su propio repositorio Git.</li>
+          <li>Abre esa carpeta nueva y escribe <code>/onboarding</code>. Al detectarla como proyecto, te hace una entrevista corta solo sobre ese cliente — no repite nada de lo que ya sabe de tu negocio.</li>
+        </ol>
+        <p>Puedes tener tantos proyectos como quieras: todos heredan el mismo cerebro de negocio y aparecen juntos en tu dashboard.</p>
+        <div class="tut-nav-btns"><button class="btn btn-ghost tut-prev">Atrás</button><button class="btn btn-primary tut-next">Siguiente <i data-lucide="arrow-right"></i></button></div>
+      </article>
+
+      <article class="acc-body tut-panel" data-panel="4">
+        <h2><span class="tut-n">4</span> Uso en el día a día</h2>
+        <p class="tut-lead">Aquí está el valor real: lo que ganas usándolo cada semana.</p>
         <table>
-          <thead><tr><th>Archivo</th><th>Qué poner</th></tr></thead>
+          <thead><tr><th>Comando</th><th>Para qué lo usas</th></tr></thead>
           <tbody>
-            <tr><td><code>negocio.md</code></td><td>Qué hace tu empresa, propuesta de valor, diferencial</td></tr>
-            <tr><td><code>servicios-pricing.md</code></td><td>Qué vendes y a qué precio</td></tr>
-            <tr><td><code>equipo.md</code></td><td>Quién es quién y quién decide</td></tr>
-            <tr><td><code>clientes-objetivo.md</code></td><td>A quién te diriges</td></tr>
-            <tr><td><code>estrategia.md</code></td><td>Objetivos y prioridades</td></tr>
-            <tr><td><code>procesos.md</code></td><td>Cómo entra un cliente y cómo se le entrega</td></tr>
+            <tr><td><code>/estado</code></td><td>Resumen rápido de un proyecto o de todo el negocio, sin buscar en carpetas ni WhatsApp.</td></tr>
+            <tr><td><code>/informe</code></td><td>Convierte notas o una reunión en un informe con formato profesional, en segundos.</td></tr>
+            <tr><td><code>/dashboard</code></td><td>Actualiza el panel visual de seguimiento — se abre directo en el navegador, sin instalar nada.</td></tr>
+            <tr><td><code>/commit</code></td><td>Guarda tu trabajo sin saber Git. Documenta lo que has hecho y actualiza el histórico solo.</td></tr>
+            <tr><td><code>/task-audit</code></td><td>Revisa qué tareas repites cada semana y te dice cuáles conviene automatizar primero.</td></tr>
           </tbody>
         </table>
-        <p>No hace falta que lo hagas a mano: puedes abrir Claude Code y pedirle <em>"ayúdame a rellenar el CONTEXT de mi negocio"</em>, e irá preguntándote.</p>
-        <h4>Personalizar la identidad</h4>
-        <p>En el archivo <code>.claude/CLAUDE.md</code> sustituye el nombre del negocio y del responsable donde aparezcan los marcadores <code>{{NOMBRE_NEGOCIO}}</code> y <code>{{DUENO}}</code>. También puedes pedírselo a la IA: <em>"personaliza la plantilla con estos datos…"</em>.</p>
-        <h4>Conectar integraciones (opcional)</h4>
-        <p>Si tu negocio usa plataformas (un CRM, base de datos, etc.):</p>
-        <ol>
-          <li>Copia el archivo <code>.env.example</code> y renómbralo a <code>.env</code>.</li>
-          <li>Pega ahí tus credenciales (claves de API). El <code>.env</code> <strong>nunca se comparte ni se sube a ningún sitio</strong>.</li>
-          <li>Documenta cada plataforma en <code>.claude/DATA/integraciones/</code> usando la plantilla incluida.</li>
-        </ol>
-        <p>Las integraciones que ya vienen con tu cuenta de Claude (Google Drive, Microsoft 365, Figma, Canva…) se activan desde la propia app de Claude, no requieren claves aquí.</p>
-        <h4>Comprobar que funciona</h4>
-        <p>Abre cualquier carpeta en Claude Code y pregunta: <em>"¿quién soy y cómo trabajas?"</em>. Si responde describiendo tu negocio, el cerebro está bien instalado.</p>
-      </div>
-    </details>
+        <p>Para lo que no es un comando, simplemente hablas: <em>"¿Cómo va el proyecto Acme?"</em>, <em>"Guarda esta reunión: [notas]"</em>, <em>"Automatiza el seguimiento de clientes sin contacto."</em> La IA distingue sola si quieres operar o construir.</p>
+        <h4>Cuando construyes algo nuevo</h4>
+        <p>La IA nunca empieza a la primera: investiga, te presenta un plan y espera tu "adelante". Si lo que construye necesita algo extra en tu ordenador —como Node.js, para páginas o herramientas más avanzadas—, te lo pide en ese momento, no antes.</p>
+        <div class="tut-nav-btns"><button class="btn btn-ghost tut-prev">Atrás</button><button class="btn btn-primary tut-next">Siguiente <i data-lucide="arrow-right"></i></button></div>
+      </article>
 
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">4</span> Crear tu primer proyecto</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
-        <p>Cada cliente o iniciativa interna es un proyecto. Para crear uno:</p>
-        <ol>
-          <li>Crea (si no existe) una carpeta <code>Proyectos</code> en tu Escritorio. <strong>Todos tus proyectos cuelgan de aquí</strong> — es lo que permite la vista de negocio.</li>
-          <li>Copia la carpeta <code>plantilla-proyecto/</code> dentro de <code>Proyectos/</code> y renómbrala con el nombre del proyecto (ej. <code>Proyectos/Cliente-Acme</code>).</li>
-          <li>Ábrela en Claude Code.</li>
-        </ol>
-        <p>El proyecto ya hereda todo tu negocio. Dentro tiene su propio registro:</p>
-        <ul>
-          <li><code>ESTADO.md</code> — cómo va el proyecto ahora mismo.</li>
-          <li><code>MAPA.md</code> — índice de dónde está cada cosa.</li>
-          <li><code>HISTORICO.md</code> — lo que se ha ido haciendo.</li>
-          <li>Las carpetas de trabajo (<code>CONTEXT</code>, <code>DATA</code>, <code>INTELLIGENCE</code>, <code>AUTOMATION</code>, <code>BUILD</code>).</li>
-        </ul>
-        <p>Rellena el <code>CONTEXT</code> del proyecto solo con lo específico de ese cliente; lo general del negocio ya lo conoce.</p>
-      </div>
-    </details>
-
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">5</span> Cómo usarlo en el día a día</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
-        <p>Hablas con la IA en lenguaje normal. Ella reconoce si quieres operar o construir.</p>
-        <h4>Operar (consultar y registrar)</h4>
-        <ul>
-          <li><em>"¿Cómo va el proyecto Acme?"</em></li>
-          <li><em>"Guarda esta reunión: [notas]"</em> → la archiva y extrae los pendientes.</li>
-          <li><em>"Resúmeme el estado de todos mis proyectos."</em></li>
-          <li><em>"Actualízame el estado tras esta llamada."</em></li>
-        </ul>
-        <h4>Construir (crear algo nuevo)</h4>
-        <ul>
-          <li><em>"Automatiza el seguimiento de clientes sin contacto."</em></li>
-          <li><em>"Móntame una herramienta para generar propuestas."</em></li>
-        </ul>
-        <p>Cuando pides construir, la IA <strong>no empieza a la primera</strong>. Primero investiga, escribe un plan y <strong>te lo presenta para que lo apruebes</strong>. Solo cuando dices "aprobado" construye, y al terminar verifica que funciona y lo registra. Nunca fabrica nada a tus espaldas.</p>
-        <h4>Comandos</h4>
-        <p>Escribiendo <code>/</code> accedes a comandos directos. Los principales:</p>
-        <table>
-          <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
-          <tbody>
-            <tr><td><code>/estado</code></td><td>Resumen rápido del proyecto o del negocio</td></tr>
-            <tr><td><code>/informe</code></td><td>Genera un informe con formato profesional a partir de notas o reuniones</td></tr>
-            <tr><td><code>/dashboard</code></td><td>Actualiza el panel de seguimiento</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">6</span> El dashboard de seguimiento</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
-        <p>El AIOS lleva dos vistas:</p>
-        <ul>
-          <li><strong>Dashboard de negocio</strong> — recorre todos los proyectos de tu carpeta <code>Proyectos/</code> y muestra el estado de cada uno en un solo panel. Lo actualizas con <code>/dashboard</code> desde el nivel negocio.</li>
-          <li><strong>Dashboard de proyecto</strong> — el detalle de un proyecto concreto, alimentado por su <code>ESTADO.md</code>.</li>
-        </ul>
-        <p>Para abrir un panel, ejecuta su archivo y se mostrará en tu navegador.</p>
-      </div>
-    </details>
-
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">7</span> Preguntas frecuentes</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
+      <article class="acc-body tut-panel" data-panel="5">
+        <h2><span class="tut-n">5</span> Preguntas frecuentes</h2>
         <p class="faq-q">¿Necesito saber programar?</p>
-        <p>No. Todo se hace hablando con la IA en lenguaje normal. Los pasos técnicos (instalar, copiar carpetas) son los del manual.</p>
+        <p>No. Todo se hace hablando con la IA en lenguaje normal.</p>
         <p class="faq-q">¿Mis datos son privados?</p>
-        <p>Sí. El AIOS vive en tu equipo. Las credenciales van en un archivo <code>.env</code> que no se comparte. Tú controlas qué se conecta.</p>
+        <p>Sí. El AIOS vive en tu equipo. Las claves y contraseñas nunca se suben a ningún sitio. Tú decides qué se conecta.</p>
+        <p class="faq-q">¿Puedo dejar el onboarding a medias?</p>
+        <p>Sí. Corta cuando quieras: al volver a escribir <code>/onboarding</code>, retoma justo donde lo dejaste.</p>
+        <p class="faq-q">¿Y si no tengo cuenta de GitHub?</p>
+        <p>No pasa nada — el propio onboarding te guía a crearla si hace falta.</p>
         <p class="faq-q">¿Puedo tener muchos proyectos?</p>
-        <p>Los que quieras. Todos heredan el mismo cerebro de negocio y aparecen en el dashboard.</p>
+        <p>Los que quieras. Todos heredan el mismo cerebro de negocio y aparecen juntos en el dashboard.</p>
         <p class="faq-q">¿La IA puede construir cosas sin avisarme?</p>
-        <p>No. Cualquier construcción se para y pide tu aprobación antes de tocar nada.</p>
-        <p class="faq-q">Instalé el cerebro pero no reconoce mi negocio.</p>
-        <p>Revisa que copiaste el contenido de <code>aios-global/</code> <em>dentro</em> de <code>.claude</code> (no la carpeta <code>aios-global</code> entera) y que rellenaste <code>CONTEXT/</code>.</p>
-      </div>
-    </details>
+        <p>No. Cualquier construcción se detiene y pide tu aprobación antes de tocar nada.</p>
+        <div class="tut-nav-btns"><button class="btn btn-ghost tut-prev">Atrás</button><button class="btn btn-primary tut-next">Siguiente <i data-lucide="arrow-right"></i></button></div>
+      </article>
 
-    <details>
-      <summary><span class="acc-t"><span class="acc-n">8</span> Soporte</span><i class="chev" data-lucide="chevron-down"></i></summary>
-      <div class="acc-body">
+      <article class="acc-body tut-panel" data-panel="6">
+        <h2><span class="tut-n">6</span> Soporte</h2>
         <p>Este AIOS es un producto de <strong>Criza Grupo</strong>. Para dudas, instalación asistida o personalización avanzada, contacta con el equipo de Criza.</p>
-      </div>
-    </details>
 
-  </section>
+        <div class="descarga" id="descargar" style="margin-top:32px">
+          <h2>Descarga AIOS by Criza</h2>
+          <p>El paquete incluye el cerebro del negocio (<code>aios-global/</code>), la plantilla de proyecto y este manual. Sigue los pasos de arriba para instalarlo.</p>
+          <a class="btn btn-primary" href="archivos/AIOS-by-Criza.zip" download>
+            Descargar AIOS-by-Criza.zip <i data-lucide="download"></i>
+          </a>
+          <p class="descarga-nota">Archivo .zip · convierte la IA en el sistema operativo de tu negocio.</p>
+        </div>
 
-  <!-- CTA DE DESCARGA -->
-  <section class="descarga" id="descargar">
-    <h2>Descarga AIOS by Criza</h2>
-    <p>El paquete incluye el cerebro del negocio (<code>aios-global/</code>), la plantilla de proyecto y este manual. Sigue los pasos de arriba para instalarlo.</p>
-    <a class="btn btn-primary" href="archivos/AIOS-by-Criza.zip" download>
-      Descargar AIOS-by-Criza.zip <i data-lucide="download"></i>
-    </a>
-    <p class="descarga-nota">Archivo .zip · convierte la IA en el sistema operativo de tu negocio.</p>
-  </section>
+        <div class="tut-nav-btns"><button class="btn btn-ghost tut-prev">Atrás</button><span class="spacer"></span></div>
+      </article>
 
+    </section>
+  </div>
 </main>
 
 <footer>
@@ -235,6 +274,50 @@
 </footer>
 
 <script src="https://unpkg.com/lucide@latest"></script>
-<script>if (window.lucide) lucide.createIcons();</script>
+<script>
+  if (window.lucide) lucide.createIcons();
+
+  (function(){
+    var steps = Array.prototype.slice.call(document.querySelectorAll('.tut-step'));
+    var panels = Array.prototype.slice.call(document.querySelectorAll('.tut-panel'));
+    var total = steps.length;
+    var bar = document.querySelector('.tut-progress-bar span');
+    var label = document.querySelector('.tut-progress-label');
+
+    function goTo(n, scroll){
+      steps.forEach(function(s){
+        var i = Number(s.dataset.step);
+        s.classList.toggle('active', i === n);
+        s.classList.toggle('done', i < n);
+        var num = s.querySelector('.tut-step-n');
+        num.textContent = i < n ? '✓' : i;
+      });
+      panels.forEach(function(p){
+        p.classList.toggle('active', Number(p.dataset.panel) === n);
+      });
+      bar.style.width = (n / total * 100) + '%';
+      label.textContent = 'Paso ' + n + ' de ' + total;
+      if (scroll) document.getElementById('tutorial').scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    steps.forEach(function(s){
+      s.addEventListener('click', function(){ goTo(Number(s.dataset.step), false); });
+    });
+    document.querySelectorAll('.tut-next').forEach(function(b){
+      b.addEventListener('click', function(){
+        var cur = Number(b.closest('.tut-panel').dataset.panel);
+        goTo(Math.min(cur + 1, total), true);
+      });
+    });
+    document.querySelectorAll('.tut-prev').forEach(function(b){
+      b.addEventListener('click', function(){
+        var cur = Number(b.closest('.tut-panel').dataset.panel);
+        goTo(Math.max(cur - 1, 1), true);
+      });
+    });
+
+    goTo(1, false);
+  })();
+</script>
 </body>
 </html>
