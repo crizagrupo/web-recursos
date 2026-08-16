@@ -305,4 +305,5 @@ async function initBiblioteca(){
 document.addEventListener("DOMContentLoaded", function(){
   initFormulario();
   initBiblioteca();
+  pintarIconos(); // pinta los iconos estáticos (p.ej. la tarjeta CTA) sin esperar al fetch
 });

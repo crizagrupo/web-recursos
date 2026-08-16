@@ -191,6 +191,21 @@ body.landing-full{height:100vh;overflow:hidden;display:flex;flex-direction:colum
 .res-feat p{font-size:15.5px;color:var(--muted);margin:0 0 22px;line-height:1.6;max-width:560px}
 .res-feat .btn{align-self:flex-start}
 
+/* ============================================================================
+   CTA — llamada de diagnóstico gratuita (franja de cierre de biblioteca)
+   ============================================================================ */
+.cta-band{background:linear-gradient(180deg,#eef1f8 0%,#e2e9f6 100%);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:76px 0;margin:64px 0 0;text-align:center}
+.cta-band .wrap{max-width:640px}
+.cta-card{background:var(--surface);border:1px solid rgba(20,48,110,.16);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:52px 44px}
+.cta-band .eyebrow{margin-bottom:18px}
+.cta-band h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:16px}
+.cta-band p{font-size:16px;color:var(--muted);margin:0 auto 30px;line-height:1.65}
+.cta-band .btn{font-size:16px;padding:15px 30px}
+@media(max-width:600px){.cta-band{padding:52px 0}.cta-card{padding:38px 26px}}
+
 /* MOCKUP: PRODUCTO (wordmark AIOS sobre navy) */
 .prev-prod{position:absolute;inset:0;background:linear-gradient(150deg,var(--navy) 0%,var(--navy-deep) 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;overflow:hidden}
